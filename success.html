@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirigiendo al éxito de pago</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    
+    const deepLink = "com.rol.mercadopago://payment/success";
+    window.location.href = deepLink;
+
+    setTimeout(() => {
+      document.getElementById('fallback').style.display = 'block';
+    }, 3000);
+  </script>
+</head>
+<body>
+  <p>Redirigiendo a la aplicación...</p>
+  <div id="fallback" style="display:none;">
+    <p>Si no se abrió automáticamente, <a id="openApp" href="com.rol.mercadopago://payment/success">toca aquí para volver a la app</a>.</p>
+  </div>
+</body>
+</html>

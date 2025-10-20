@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pago fallido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    const deepLink = "com.rol.mercadopago://payment/failure";
+    window.location.href = deepLink;
+    setTimeout(() => {
+      document.getElementById('fallback').style.display = 'block';
+    }, 3000);
+  </script>
+</head>
+<body>
+  <p>El pago no se completó correctamente. Redirigiendo a la app...</p>
+  <div id="fallback" style="display:none;">
+    <p><a href="com.rol.mercadopago://payment/failure">Volver a la app</a></p>
+  </div>
+</body>
+</html>
