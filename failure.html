@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Pago fallido</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css"/>
   <script>
     const deepLink = "com.rol.mercadopago://payment/failure";
-    window.location.href = deepLink;
-    setTimeout(() => {
-      document.getElementById('fallback').style.display = 'block';
-    }, 3000);
+
+    function tryOpenDeepLink() {
+      const ifr = document.createElement('iframe');
+      ifr.style.display = 'none';
+      ifr.src = deepLink;
+      document.body.appendChild(ifr);
+
+      setTimeout(()=> {
+        document.getElementById('fallback').style.display = 'block';
+        try { document.body.removeChild(ifr); } catch(e){}
+      }, 3000);
+    }
+
+    window.addEventListener('DOMContentLoaded', tryOpenDeepLink);
   </script>
 </head>
-<body>
-  <p>El pago no se completó correctamente. Redirigiendo a la app...</p>
-  <div id="fallback" style="display:none;">
-    <p><a href="com.rol.mercadopago://payment/failure">Volver a la app</a></p>
+<body class="failure">
+  <div class="container box">
+    <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="Fallido"/>
+    <h1>Pago fallido</h1>
+    <p>Tu pago no pudo completarse. Por favor, intenta nuevamente.</p>
+
+    <div id="fallback">
+      <a class="button" href="com.rol.mercadopago://payment/failure">Abrir la app</a>
+      <p style="margin-top:10px;font-size:13px;color:#666">Si estás en PC, esta acción sólo funciona en el móvil con la app instalada.</p>
+    </div>
   </div>
 </body>
 </html>
